@@ -1,0 +1,32 @@
+# BITÁCORA IPZStream — base XUI clásica
+
+## 2026-09-18 — Inicio de nueva base
+
+Se adopta `ronbercito/ipprueba` como base activa del nuevo IPZStream.
+
+Respaldo creado antes de modificaciones:
+`backup/original-xui-before-ipzstream-2026-09-18`
+
+### Etapa 1 autorizada — Congelación e inventario
+
+Se confirma mediante inventario del repositorio que la base contiene el panel administrativo completo, área reseller, reproductor web, endpoints IPTV y runtime histórico empaquetado.
+
+Decisión de arquitectura:
+- mantener inicialmente el aspecto y flujo del panel existente;
+- trabajar directamente sobre esta base;
+- no reconstruir la interfaz en el frontend React anterior;
+- modernizar de forma incremental los componentes internos;
+- priorizar Ubuntu 24.04 y dependencias mantenibles;
+- mantener Streams/Channels, reproductor, iconos, tablas, formularios y navegación reconocibles durante la migración.
+
+### Hallazgos iniciales
+- `admin/`: panel y módulos operativos.
+- `includes/`: núcleo histórico y streaming.
+- `www/`: APIs y entrega IPTV.
+- `player/`: reproductor Live/VOD/Series.
+- `reseller/`: panel reseller.
+- `bin/`: runtime legado empaquetado, incluyendo FFmpeg, Nginx, nginx-rtmp, PHP y Redis.
+
+Estado: documentación base publicada. No se ha alterado todavía el comportamiento del panel clásico.
+
+Próximo trabajo: auditoría técnica del arranque/runtime y diseño de sustitución segura para Ubuntu 24.04.
