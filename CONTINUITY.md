@@ -50,3 +50,24 @@ Alcance:
 - definir migración incremental para evitar una reescritura visual.
 
 Siguiente subetapa: auditar arranque, configuración, base de datos, PHP/runtime, Nginx, Redis y FFmpeg antes de modificar el funcionamiento.
+
+
+## ETAPA 1.1 — Auditoría de arranque/runtime — COMPLETADA
+
+Hallazgos confirmados en el código actual:
+- `service` fija `/home/xui`, usuario `xui` y arranca Redis, Nginx, nginx-rtmp, PHP-FPM y varios workers CLI desde binarios empaquetados.
+- El arranque ejecuta `startup.php`, `signals.php`, `watchdog.php`, `queue.php` y, cuando existen, `cache_handler.php` y `connection_sync.php`.
+- `bin/daemons.sh` levanta cuatro pools PHP-FPM propios desde `/home/xui/bin/php`.
+- `update` depende del servicio systemd `xuione`, extrae paquetes tar sobre la instalación y ejecuta el post-update histórico.
+- El runtime incluye Redis propio, Nginx propio, nginx-rtmp, PHP propio y árboles FFmpeg 4.0/4.3/4.4.
+- `bin/install/database.sql` conserva el esquema histórico de instalación.
+
+### Decisión
+No se sustituirá el runtime en bloque. La modernización será por capas para mantener el panel funcionando y visualmente intacto.
+
+Orden técnico:
+1. crear un bootstrap/diagnóstico IPZStream no destructivo para Ubuntu 24.04;
+2. inventariar versión/compatibilidad de binarios sin ejecutarlos durante el desarrollo;
+3. desacoplar gradualmente `sudo` y rutas rígidas del script `service`;
+4. mantener esquema y UI mientras se valida cada sustitución;
+5. abordar actualizador/licencia heredados como componentes separados, sin romper autenticación ni panel.
