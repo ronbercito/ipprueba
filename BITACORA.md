@@ -48,3 +48,7 @@ Hallazgos:
 No se modificó ningún componente operativo. Se mantiene intacta la UI clásica.
 
 Próximo cambio autorizado: añadir herramientas propias de diagnóstico/compatibilidad IPZStream que sean no destructivas y no alteren el arranque XUI existente.
+
+
+### Herramienta propia añadida
+Se añadió `ipzstream-compat-audit.sh`, auditor de solo lectura para OS, kernel, arquitectura, comandos del sistema, runtime empaquetado y rutas esenciales. No inicia/detiene servicios ni modifica archivos. Nota: el nombre `tools` ya existe como archivo en la raíz histórica, por eso el auditor se mantiene en la raíz.
