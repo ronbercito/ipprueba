@@ -30,3 +30,21 @@ Decisión de arquitectura:
 Estado: documentación base publicada. No se ha alterado todavía el comportamiento del panel clásico.
 
 Próximo trabajo: auditoría técnica del arranque/runtime y diseño de sustitución segura para Ubuntu 24.04.
+
+
+## 2026-09-18 — Etapa 1.1: auditoría runtime
+
+Revisados `service`, `update`, `bin/daemons.sh`, `includes/cli/` y los árboles de runtime.
+
+Hallazgos:
+- servicio monolítico basado en `/home/xui` y usuario `xui`;
+- Redis/Nginx/nginx-rtmp/PHP-FPM empaquetados;
+- cuatro pools PHP-FPM;
+- workers CLI de startup, señales, watchdog, cola y cache;
+- actualizador histórico acoplado a `xuione`;
+- FFmpeg empaquetado en ramas 4.0, 4.3 y 4.4;
+- esquema de instalación histórico disponible en `bin/install/database.sql`.
+
+No se modificó ningún componente operativo. Se mantiene intacta la UI clásica.
+
+Próximo cambio autorizado: añadir herramientas propias de diagnóstico/compatibilidad IPZStream que sean no destructivas y no alteren el arranque XUI existente.
