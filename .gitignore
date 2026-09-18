@@ -1,1 +1,3 @@
 bin/install/loadbalancer.tar.gz
+ipzstream/config.php
+bin/php/sessions/
