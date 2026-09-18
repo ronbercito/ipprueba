@@ -1,0 +1,2 @@
+/home/xui/admin/*
+/home/xui/reseller/*
